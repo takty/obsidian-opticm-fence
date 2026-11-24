@@ -1,8 +1,102 @@
-/*
+.opticm-fence-block {
+	background-color: var(--code-styler-codeblock-background-colour, var(--code-background, var(--background-secondary)));
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s, 4px);
+	box-shadow: none;
+}
 
-This CSS file will be included with your plugin, and
-available in the app when your plugin is enabled.
+.opticm-fence-block .opticm-fence-viewer .cm-editor {
+	background-color: transparent;
+	border-radius: inherit;
+}
 
-If your plugin does not need CSS, delete this file.
+.opticm-fence-block .opticm-fence-viewer .cm-gutters:not(:has(.cm-lineNumbers))::after {
+	content: none;
+}
 
-*/
+.opticm-fence-block .opticm-fence-viewer {
+	border-radius: inherit;
+}
+
+.opticm-fence-title {
+	padding: .45em var(--header-spacing, .75em);
+	background: var(--code-styler-header-background-colour, var(--background-secondary));
+	border-bottom: 1px solid var(--code-styler-header-separator-colour, var(--background-modifier-border));
+	border-radius: var(--radius-s, 4px) var(--radius-s, 4px) 0 0;
+	color: var(--text-normal);
+	font-family: var(--font-monospace);
+	font-size: var(--code-size);
+	overflow-wrap: anywhere;
+}
+
+.opticm-fence-viewer .opticm .cm-editor {
+	font-family: var(--font-monospace);
+	font-size: var(--code-size);
+}
+
+.opticm-fence-viewer .opticm .cm-content,
+.opticm-fence-viewer .opticm .cm-line {
+	user-select: text;
+}
+
+@media print {
+	.opticm-fence-viewer .opticm .cm-scroller {
+		scrollbar-width: none;
+	}
+}
+.opticm-fence-source[hidden] {
+	display: none !important;
+}
+
+.opticm-fence-print-code {
+	font-family: var(--font-monospace, monospace);
+	font-size: var(--code-size, 1em);
+	line-height: 1.65;
+	tab-size: 4;
+	overflow: visible;
+	print-color-adjust: exact;
+	-webkit-print-color-adjust: exact;
+}
+
+.opticm-fence-print-code .opticm-fence-print-row {
+	position: relative;
+	display: flex;
+	break-inside: avoid;
+	min-height: 1em;
+	isolation: isolate;
+}
+
+.opticm-fence-print-highlight {
+	position: absolute;
+	inset: 0;
+	z-index: -2;
+	pointer-events: none;
+}
+
+.opticm-fence-print-number {
+	box-sizing: border-box;
+	flex: none;
+	padding-right: .4em;
+	color: var(--text-muted, #666);
+	text-align: right;
+}
+
+.opticm-fence-print-text {
+	position: relative;
+	min-width: 0;
+	white-space: pre-wrap;
+	overflow-wrap: anywhere;
+}
+
+.opticm-fence-print-row img.opticm-fence-print-guide {
+	position: absolute;
+	z-index: -1;
+	top: 0;
+	margin: 0;
+	max-width: none;
+	border: 0 !important;
+	border-radius: 0 !important;
+	box-shadow: none !important;
+	filter: none !important;
+	pointer-events: none;
+}
