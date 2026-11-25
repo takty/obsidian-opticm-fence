@@ -39,6 +39,11 @@
 	user-select: text;
 }
 
+.opticm-fence-viewer .opticm .cm-editor .cm-line {
+	/* Jisage resets the inline-start padding of CodeMirror lines with !important. */
+	padding-inline-start: var(--opticm-line-padding) !important;
+}
+
 @media print {
 	.opticm-fence-viewer .opticm .cm-scroller {
 		scrollbar-width: none;
