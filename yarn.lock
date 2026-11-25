@@ -3422,7 +3422,7 @@ __metadata:
 
 "opticm@git+https://github.com/takty/opticm.git#main":
   version: 0.1.0
-  resolution: "opticm@https://github.com/takty/opticm.git#commit=4b5ef077f9a60c2283b801eaa854289d889a1a2e"
+  resolution: "opticm@https://github.com/takty/opticm.git#commit=7b241b3b5bf01072611628188ab4a5464dd17bd7"
   dependencies:
     "@codemirror/autocomplete": "npm:6.20.4"
     "@codemirror/commands": "npm:6.11.2"
