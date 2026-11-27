@@ -1,0 +1,10 @@
+/* Keep the Viewer content-sized even in popout documents that use quirks mode. */
+.opticm-fence-viewer > .opticm,
+.opticm-fence-viewer > .opticm > .cm-editor,
+.opticm-fence-viewer > .opticm > .cm-editor > .cm-scroller {
+	height: auto;
+}
+
+.opticm-fence-viewer > .opticm > .cm-editor {
+	max-height: none;
+}

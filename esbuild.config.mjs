@@ -13,6 +13,7 @@ const worker = join(opticmDist, 'analysis-worker-java.min.js');
 const runtime = join(opticmDist, 'web-tree-sitter.wasm');
 const grammar = join(opticmDist, 'tree-sitter-java.wasm');
 const stylesheet = join(opticmDist, 'opticm.min.css');
+const viewerStyles = 'src/fence-viewer.css';
 
 const licensesDir = join(opticmDist, 'licenses');
 const markdownPackage = require.resolve('markdown-it/package.json');
@@ -64,11 +65,12 @@ const context = await esbuild.context({
 				namespace: 'opticm-fence-assets',
 			}));
 			build.onLoad({ filter: /.*/, namespace: 'opticm-fence-assets' }, async () => {
-				const [workerSource, runtimeWasm, javaWasm, css, viewer] = await Promise.all([
+				const [workerSource, runtimeWasm, javaWasm, css, viewerCss, viewer] = await Promise.all([
 					readFile(worker, 'utf8'),
 					readFile(runtime, 'base64'),
 					readFile(grammar, 'base64'),
 					readFile(stylesheet, 'utf8'),
+					readFile(viewerStyles, 'utf8'),
 					esbuild.build({
 						entryPoints: [viewerEntry],
 						bundle: true,
@@ -93,7 +95,7 @@ const context = await esbuild.context({
 						'export const workerSource = ' + JSON.stringify(browserWorker.code),
 						'export const runtimeWasm = ' + JSON.stringify(runtimeWasm),
 						'export const javaWasm = ' + JSON.stringify(javaWasm),
-						'export const css = ' + JSON.stringify(css),
+						'export const css = ' + JSON.stringify(css + '\n' + viewerCss),
 						// Obsidian renders PDF exports in a separate document on desktop.
 						'export function viewerForWindow(window, printListeners) { const document = window.document;\n'
 							+ 'const viewerMatchMedia = query => printListeners && query === "print" ? {'
@@ -102,7 +104,7 @@ const context = await esbuild.context({
 							+ '} : window.matchMedia(query);\n'
 							+ viewer.outputFiles[0].text + '\nreturn opticmViewer.createViewer; }',
 					].join(';\n'),
-					watchFiles: [viewerEntry, worker, runtime, grammar, stylesheet],
+					watchFiles: [viewerEntry, worker, runtime, grammar, stylesheet, viewerStyles],
 				};
 			});
 		},
