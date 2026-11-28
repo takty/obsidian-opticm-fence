@@ -19,9 +19,12 @@ const licensesDir = join(opticmDist, 'licenses');
 const markdownPackage = require.resolve('markdown-it/package.json');
 const resolveMarkdownDependency = createRequire(markdownPackage);
 const licenses = [
-	join(opticmDist, '..', 'LICENSE'),
-	...(await readdir(licensesDir)).sort().map(name => join(licensesDir, name)),
-	join(dirname(markdownPackage), 'LICENSE'),
+	{ name: 'opticm', path: join(opticmDist, '..', 'LICENSE') },
+	...(await readdir(licensesDir)).sort().map(name => ({
+		name: name.replace(/-LICENSE(?:\..*)?$/, ''),
+		path: join(licensesDir, name),
+	})),
+	{ name: 'markdown-it', path: join(dirname(markdownPackage), 'LICENSE') },
 	...Object.entries({
 		entities: 'LICENSE',
 		'linkify-it': 'LICENSE',
@@ -32,10 +35,21 @@ const licenses = [
 		const entry = resolveMarkdownDependency.resolve(name);
 		const packagePath = sep + join('node_modules', name) + sep;
 		const root = entry.slice(0, entry.lastIndexOf(packagePath) + packagePath.length);
-		return join(root, license);
+		return { name, path: join(root, license) };
 	}),
 ];
-const notices = (await Promise.all(licenses.map(path => readFile(path, 'utf8')))).join('\n\n');
+// Share only identical notices, including copyright holders and years.
+const licenseTexts = await Promise.all(licenses.map(({ path }) => readFile(path, 'utf8')));
+const licenseGroups = new Map();
+for (const [index, { name }] of licenses.entries()) {
+	const text = licenseTexts[index].replace(/\r\n?/g, '\n').trim();
+	const names = licenseGroups.get(text) ?? [];
+	names.push(name);
+	licenseGroups.set(text, names);
+}
+const notices = Array.from(licenseGroups, ([text, names]) =>
+	`Packages: ${names.join(', ')}\n\n${text}`,
+).join('\n\n');
 
 const context = await esbuild.context({
 	banner: {

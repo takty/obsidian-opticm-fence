@@ -129,15 +129,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@codemirror/view@npm:6.44.0":
-  version: 6.44.0
-  resolution: "@codemirror/view@npm:6.44.0"
+"@codemirror/view@npm:6.44.2":
+  version: 6.44.2
+  resolution: "@codemirror/view@npm:6.44.2"
   dependencies:
     "@codemirror/state": "npm:^6.7.0"
     crelt: "npm:^1.0.6"
     style-mod: "npm:^4.1.0"
     w3c-keyname: "npm:^2.2.4"
-  checksum: 10c0/52fa46de1548c690db441308431368c079282a055c443f6084ba77a05ee5aa7139527404429e353ed0ab579e9514f76e8505fe7b4a42c5274fe3ae3f4f9c6ff0
+  checksum: 10c0/7f1ec7e22b56ebcaf6c57d919dedfa2b4f234a979b120635c8fc52f46c53aa297b5fd2c2bf355b6b6da01de0d21001e2f9175adfb7ec7bc17573d6eaba1230bc
   languageName: node
   linkType: hard
 
@@ -3422,7 +3422,7 @@ __metadata:
 
 "opticm@git+https://github.com/takty/opticm.git#main":
   version: 0.1.0
-  resolution: "opticm@https://github.com/takty/opticm.git#commit=7b241b3b5bf01072611628188ab4a5464dd17bd7"
+  resolution: "opticm@https://github.com/takty/opticm.git#commit=29680b21f07a23d1c90fcb9ba6b7ab1b153c99e3"
   dependencies:
     "@codemirror/autocomplete": "npm:6.20.4"
     "@codemirror/commands": "npm:6.11.2"
@@ -3432,7 +3432,7 @@ __metadata:
     "@codemirror/lint": "npm:6.9.8"
     "@codemirror/search": "npm:6.7.3"
     "@codemirror/state": "npm:6.7.6"
-    "@codemirror/view": "npm:6.44.0"
+    "@codemirror/view": "npm:6.44.2"
     "@lezer/highlight": "npm:1.2.5"
     acorn: "npm:8.19.0"
     acorn-loose: "npm:8.5.2"
@@ -3443,7 +3443,7 @@ __metadata:
     tern: "npm:0.24.3"
     tree-sitter-java: "npm:0.23.5"
     web-tree-sitter: "npm:0.27.2"
-  checksum: 10c0/7b27879386a79721fc721e3a233837ccca9a67d9bf686135077a2a2cbe7d0fc8b0fc7b9182ff37bd6add654ed88d2e0d29b75be205f7cb0ccec21c4f2d462a0e
+  checksum: 10c0/6a67081d2f04da34958a5d88a86a970166e9ee0157e8714523878c91901c54a537783db72de05ad22d7d034f6c75ba29db469c26c1accd6a020ff782f1f718b0
   languageName: node
   linkType: hard
 

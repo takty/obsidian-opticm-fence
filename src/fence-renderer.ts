@@ -159,6 +159,12 @@ class FenceRenderChild extends MarkdownRenderChild {
 				for (const listener of printFactory.listeners) {
 					listener({ type: 'change', matches: true });
 				}
+				// Opticm queues Canvas painting in a microtask after CodeMirror measures.
+				// Capture only after that paint, before destroying the live viewer.
+				await Promise.resolve();
+				if (signal.aborted) {
+					return;
+				}
 				const block = snapshotPrintBlock(host, source, options.lineNumbers, options.lineNumberStart, options.highlightedLines);
 				viewer.destroy();
 				this.viewer = undefined;
